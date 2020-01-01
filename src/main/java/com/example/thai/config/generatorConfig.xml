@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="context1">
+    <jdbcConnection connectionURL="jdbc:mysql://localhost/batdongsandb" 
+    		driverClass="com.mysql.jdbc.Driver" 
+    		password="" 
+    		userId="root">
+    		<property name="nullCatalogMeansCurrent" value="true" />
+    		 </jdbcConnection>
+    <javaModelGenerator targetPackage="com.example.thai.entity" targetProject="BatDongSan_Springboot_MyBatis_thymeleaf\src\main\java" />
+    <sqlMapGenerator
+			targetPackage="com.example.thai.Mapper"
+			targetProject="BatDongSan_Springboot_MyBatis_thymeleaf\src\main\java" />
+    <javaClientGenerator
+			targetPackage="com.example.thai.Mapper"
+			targetProject="BatDongSan_Springboot_MyBatis_thymeleaf\src\main\java" type="XMLMAPPER" />
+    
+    <table  tableName="user" >
+   
+    </table>
+       <table  tableName="tin_dang">
+   
+    </table>
+       <table  tableName="tintuc">
+   
+    </table>
+       <table  tableName="tinhtrangphaply">
+   
+    </table>
+       <table  tableName="themquyen">
+   
+    </table>
+       <table  tableName="quyen">
+   
+    </table>
+       <table  tableName="camquyen">
+   
+    </table>
+       <table  tableName="province">
+   
+    </table>
+       <table  tableName="nhomquyen">
+   
+    </table>
+       <table  tableName="nhomnguoidung">
+   
+    </table>
+       <table  tableName="loaigd">
+   
+    </table>
+       <table  tableName="loaibds">
+   
+    </table>
+       <table  tableName="giaodich">
+   
+    </table>
+       <table  tableName="duan">
+   
+    </table>
+       <table  tableName="district">
+   
+    </table>
+       
+  </context>
+</generatorConfiguration>

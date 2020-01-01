@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	
+	th:replace="~{user-layout/user-layout::main-fragment(~{::title},
+												~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},  
+                                                ~{:: #home-footer}
+                                               )}">
+<!-- th:rep -->                                            
+<head>
+<meta charset="UTF-8">
+<title>home user</title>
+</head>
+<body>
+	<!--  khai bao cac parameter cua fragment -->
+	<div id="home-nav">	<!-- parameter home nav -->
+		<div class="container-fluid">
+			<div class="navbar bg-dark">
+				<ul>
+					<li><a th:href="@{/home}" class="nav-link"><span
+							th:utext="#{lang.home.title}"></span></a></li>
+					<li><a href="#" class="nav-link"
+						th:utext="#{lang.about.title}"></a></li>
+					<li>						
+						<select id="locales">
+							<option value="" th:text="#{lang.change}"></option>
+							<option value="en" th:text="#{lang.en}"></option>
+							<option value="vie" th:text="#{lang.vie}"></option>
+						</select>
+					</li>
+				</ul>
+				<div class="navbar-right">
+
+					<div class="search-box">
+						<input class="search-txt" type="text" name=""
+							placeholder="type to search"> <a class="search-btn"
+							href="#"> <i class="fas fa-search"></i>
+						</a>
+					</div>
+					<div class="text-white">
+						<ul>
+							<li><i class="far fa-user fa-2x text-white avatar"></i></li>		
+							<!-- <li><span th:text="${userprincipal.getUsername()}"></span></li> -->
+							<!--  use sec:authorize attribute to control displayed content. -->
+							<!-- kiem tra neu login roi moi hien name -->
+							<li sec:authorize="isAuthenticated()"><span sec:authentication="name"></span></li>
+							<li sec:authorize="isAuthenticated()"><a href ="/logout">Logout</a></li>
+							<li sec:authorize="isAnonymous()"><a href="/login">Login</a></li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="home-main-content">
+	<h2>Bảng xếp hạng</h2>
+		<table border="1">
+		<tr>
+		<th></th>
+		<th>Nhân viên</th>
+		<th>Phòng ban</th>
+		<th>Điểm thưởng</th>
+		</tr>
+		<th:block th:each="mapEntry: ${result}">
+			<tr>
+			<td><img th:src="@{/images/}+${mapEntry.key.getHinhanh()}" width="50" height="50"/></td>
+			<td th:utext="${mapEntry.key.getHoten()}"></td>
+			<td th:utext="${mapEntry.key.getMapb()}"></td>
+			<td th:utext="${mapEntry.value}"></td>
+			</tr>
+		</th:block>
+		</table>
+	</div>
+	<div id="home-footer"></div>
+</body>
+</html>

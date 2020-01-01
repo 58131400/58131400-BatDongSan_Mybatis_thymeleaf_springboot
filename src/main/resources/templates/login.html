@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link th:href="@{/css/login-form.css}" rel="stylesheet" type="text/css">
+<title>Login</title>
+
+
+</head>
+
+<body class="bg-dark">
+
+	<div class="loginbox">
+		<img th:src="@{/images/avatar.png}" class="avatar">
+		<form th:action="@{/j_spring_security_check}" method="post" id="login-form">
+			<h1>Đăng Nhập</h1>
+
+			<p>Username</p>
+			<input name="username" type="text" id="inputUsername"
+				class="form-control" required="required" autofocus="autofocus"
+				placeholder="Enter Username">
+
+			<p>Password</p>
+			<input name="password" type="password" class="form-control"
+				placeholder="Enter password">
+
+			<div class="form-group">
+				<div class="checkbox">
+					<label> <input type="checkbox" value="remember-me">
+						Remember Password
+					</label>
+				</div>
+			</div>
+			<input type="submit" value="login">
+
+		</form>
+		<a class="d-block small mt-3" th:href="@{/registration}">Register
+			an Account</a>&emsp; <a class="d-block small" href="forgot-password.html">Forgot
+			Password?</a>
+	</div>
+
+
+
+	<!-- Bootstrap core JavaScript-->
+	<script th:src="@{/sb-admin/vendor/jquery/jquery.min.js}"></script>
+	<script
+		th:src="@{/sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script th:src="@{/sb-admin/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+	<script type="text/javascript"
+		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+
+</body>
+
+</html>

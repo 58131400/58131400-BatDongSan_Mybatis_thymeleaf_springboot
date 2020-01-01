@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{admin-layout/admin-layout::main-fragment(
+												~{::title},
+												~{:: #thanhtich-static-resources},
+                                                ~{:: #thanhtich-header},
+                                                ~{:: #thanhtich-nav},
+                                                ~{:: #thanhtich-main-content},  
+                                                ~{:: #thanhtich-footer}
+                                               )}">
+<head>
+
+<title>thành tích nhân viên</title>
+
+</head>
+<body>
+<div id="thanhtich-main-content">
+	
+		<h2>Bảng thành tích</h2>
+		<table>
+			<tr>
+				<td rowspan="6"><img th:src="@{/images/}+${result[0].get('hinhanh')}" width="210"
+						height="230"></td>
+			
+				 <td>Mã nhân viên:</td>
+				<td><span th:utext="${result[0].get('manv')}"></span></td>  
+			</tr>
+			 <tr>
+				<td>Họ tên nhân viên:</td>
+				<td><span th:utext="${result[0].get('hoten')}" ></span></td>
+			</tr>
+			
+			<tr>
+				<td>Phòng ban</td>
+				<td><span th:utext="${result[0].get('mapb')}" ></span></td>
+			</tr> 
+		</table>
+	<table border="1" cellpadding="5" border-collapse="collapse">
+		<tr>
+		<th>loại</th>
+		<th>lí do</th>
+		<th>Ngày ghi nhận </th>
+		</tr>
+		<th:block th:each="row: ${result}">
+		<tr>
+		<td th:utext="${row.get('loai')}? 'khen thưởng' : 'Kỉ luật'"></td>
+		<td th:utext="${row.get('lydo')}"></td>
+		<td th:utext="${#calendars.format(row.get('ngayghinhan'),'dd-MM-yyyy')}"></td>
+		</tr>
+		</th:block>
+	</table>
+	
+	<a th:href="@{/themthanhtich(manv=${result[0].get('manv')})}" class="btn btn-primary">Thêm mới</a>
+</body>
+</html>

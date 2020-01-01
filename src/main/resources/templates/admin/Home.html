@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html
+xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	
+	th:replace="~{admin-layout/admin-layout::main-fragment(~{::title},
+												~{:: #home-static-resources},
+                                                ~{:: #home-header},
+                                                ~{:: #home-nav},
+                                                ~{:: #home-main-content},  
+                                                ~{:: #home-footer}
+                                               )}">
+
+<head>
+
+<title>Trang admin</title>
+<th:block id="home-static-resources" th:replace="~{/fragments/app-fragments::admin-static-resource}"></th:block>
+
+</head>
+
+<header id="home-header" th:replace="~{/fragments/app-fragments::header-admin}"></header>
+
+
+<div id="home-main-content">
+	<div id="wrapper">
+
+		<div>
+			<span th:utext="${userName}"></span>
+		</div>
+
+		<div id="content-wrapper">
+
+			<div class="container-fluid">
+
+				<!-- DataTables Example -->
+				<div class="card mb-3">
+					<div class="card-header">
+						<i class="fas fa-table"></i> Danh sÃ¡ch NhÃ¢n viÃªn
+					</div>
+					<div class="card-body">
+						<a th:href="@{/create}">Create New</a>
+						<div class="table-responsive">
+							<table class="table table-bordered text-center" width="100%"
+								cellspacing="0">
+								<thead>
+									<tr>
+										
+										<th>Id tin</th>
+										<th>Tài khoản</th>									
+										<th>ngày đăng</th>
+										<th>Số ngày đăng</th>
+										<th>Total view</th>
+										<th>Tiêu đề tin</th>
+										<th>Tỉnh / Thành phố</th>
+										<th>quận/ huyện</th>
+										<th>Đường</th>										
+										<th>Loại giao dịch</th>
+										<th>Loại bds</th>
+										<th>Giá</th>
+										<th>Diện tích</th>
+										<th>Tình trạng pháp lý</th>
+										<th>số phòng ngủ</th>
+										<th>Số phòng tắm</th>
+										<th>số tầng</th>
+										<th>Tổng số phòng</th>
+										<th>Ảnh mặt tiền</th>
+										<th>Mô tả thêm</th>
+									</tr>
+								</thead>
+								<tbody>
+
+									<tr th:each="tin,iter :${listtin}">
+										
+										<td th:utext="${tin.get('tindang').getPkTindangid()}"></td>
+										<td th:utext="${tin.get('user').getFullname()}"></td>									
+										<td th:utext="${#calendars.format(tin.get('tindang').getNgaydangtin(),'dd-MM-yyyy')}"></td>
+										<td th:utext="${tin.get('tindang').getSongaydang()}"></td>
+										<td th:utext="${tin.get('tindang').getTotalview()}"></td>
+										<td th:utext="${tin.get('tindang').getTieudetin()}"></td>
+										<td th:utext="${tin.get('tinh').getTen()}"></td>
+										<td th:utext="${tin.get('quan').getTen()}"></td>
+										<td th:utext="${tin.get('tindang').getStreet()}"></td>
+										<td th:utext="${tin.get('loaigd').getTen()}"></td>
+										<td th:utext="${tin.get('loaibds').getTen()}"></td>
+										<td th:utext="${#numbers.formatDecimal(tin.get('tindang').getGia(),0,'COMMA',0,'POINT')}"></td>
+										<td th:utext="${tin.get('tindang').getDientich()}"></td>
+										<td th:utext="${tin.get('tinhtrangphaply').getTen()}"></td>
+										<td th:utext="${tin.get('tindang').getSophongngu()}"></td>
+										<td th:utext="${tin.get('tindang').getSophongtam()}"></td>
+										<td th:utext="${tin.get('tindang').getSotang()}"></td>
+										<td th:utext="${tin.get('tindang').getTongsophong()}"></td>
+										<td th:utext="${tin.get('tindang').getAnhmattien()}"></td>
+										<td th:utext="${tin.get('tindang').getMotathem()}"></td>
+										
+										
+										<!--  <td><a th:href="@{/edit(manv=${nv.manv})}"><i
+												class="fas fa-user-edit"></i>edit</a>/<a
+											th:href="@{/delete(manv=${nv.manv})}"><i
+												class="fas fa-trash-alt"></i>delete</a></td> --> 
+									</tr>
+
+
+
+								</tbody>
+								<tfoot>
+									<tr>
+										
+										<th>Id tin</th>
+										<th>Tài khoản</th>
+										
+										<th>ngày đăng</th>
+										<th>Số ngày đăng</th>
+										<th>Total view</th>
+										<th>Tiêu đề tin</th>
+										<th>Tỉnh / Thành phố</th>
+										<th>quận/ huyện</th>
+										<th>Đường</th>
+										
+										<th>Loại giao dịch</th>
+										<th>Loại bds</th>
+										<th>Giá</th>
+										<th>Diện tích</th>
+										<th>Tình trạng pháp lý</th>
+										<th>số phòng ngủ</th>
+										<th>Số phòng tắm</th>
+										<th>số tầng</th>
+										<th>Tổng số phòng</th>
+										<th>Ảnh mặt tiền</th>
+										<th>Mô tả thêm</th>
+									</tr>
+								</tfoot>
+								<tbody>
+
+									<tr th:each="nv,iter :${nhanviens}">
+										<td th:utext="${iter.count}"></td>
+										<td th:utext="${nv.manv}"></td>
+										<td th:utext="${nv.hoten}"></td>
+										<td th:utext="${nv.gioitinh}? 'Nam' : 'Ná»¯'"></td>
+										<td th:utext="${#calendars.format(nv.ngaysinh,'dd-MM-yyyy')}"></td>
+										<td th:utext="${nv.hinhanh}"></td>
+										<td th:utext="${nv.email}"></td>
+										<td
+											th:utext="${#numbers.formatDecimal(nv.luong,0,'COMMA',0,'POINT')}"></td>
+										<td th:utext="${nv.capdo}"></td>
+										<td th:utext="${nv.dienthoai}"></td>
+										<td th:utext="${nv.ghichu}"></td>
+										<td th:utext="${nv.mapb}"></td>
+										<td><a th:href="@{/edit(manv=${nv.manv})}"><i
+												class="fas fa-user-edit"></i>edit</a>/<a
+											th:href="@{/delete(manv=${nv.manv})}"><i
+												class="fas fa-trash-alt"></i>delete</a></td>
+									</tr>
+
+
+
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+					<div class="card-footer small text-muted">
+						Updated today at <span
+							th:utext="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></span>
+					</div>
+				</div>
+
+
+
+			</div>
+			<!-- /.container-fluid -->
+
+			<!-- Sticky Footer -->
+			<footer class="sticky-footer">
+				<div class="container my-auto">
+					<div class="copyright text-center my-auto">
+						<span>Copyright © Your Website 2019</span>
+					</div>
+				</div>
+			</footer>
+
+		</div>
+		<!-- /.content-wrapper -->
+
+	</div>
+	<!-- /#wrapper -->
+</div>
+	
+
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">Ã—</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready
+					to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login.html">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript-->
+	<script th:src="@{/sb-admin/vendor/jquery/jquery.min.js}"></script>
+	<script
+		th:src="@{/sb-admin/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script th:src="@{/sb-admin/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+	<!-- Page level plugin JavaScript-->
+	<script th:src="@{/sb-admin/vendor/datatables/jquery.dataTables.js}"></script>
+	<script
+		th:src="@{/sb-admin/vendor/datatables/dataTables.bootstrap4.js}"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script th:src="@{/sb-admin/js/sb-admin.min.js}"></script>
+
+	<!-- Demo scripts for this page-->
+	<script th:src="@{/sb-admin/js/demo/datatables-demo.js}"></script>
+
+</body>
+
+</html>

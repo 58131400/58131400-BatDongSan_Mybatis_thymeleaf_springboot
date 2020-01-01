@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	th:fragment="main-fragment(title, otherStaticResources, header, nav, mainContent, footer)">
+<head>
+<meta charset="UTF-8">
+<title th:replace="${title}"></title>
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{sb-admin/vendor/fontawesome-free/css/all.min.css}">
+<link th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css">
+
+
+
+<link rel="stylesheet" th:href="@{jquery-ui/jquery-ui.min.css}">
+
+<script th:src="@{jquery-ui/external/jquery/jquery.js}"></script>
+<script th:src="@{jquery-ui/jquery-ui.min.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}"
+	href="/css/styles.css">
+<th:block th:replace="${otherStaticResources} ?:~{}"></th:block>
+
+</head>
+<body>
+	<header th:insert="${header}?:~{}"> </header>
+	<section>
+		<nav th:insert="${nav}?:~{}"></nav>
+
+		<article th:insert="${mainContent}?:~{}"></article>
+	</section>
+	<footer th:insert="${footer}?:~{}"></footer>
+
+	<script type="text/javascript">
+$(document).ready(function() {
+    $("#locales").change(function () {
+        var selectedOption = $('#locales').val();
+        if (selectedOption != ''){
+            window.location.replace('home?lang=' + selectedOption);
+        }
+    });
+});
+</script>
+</body>
+</html>

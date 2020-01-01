@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{admin-layout/admin-layout::main-fragment(~{::title},
+												~{:: #edit-static-resources},
+                                                ~{:: #edit-header},
+                                                ~{:: #edit-nav},
+                                                ~{:: #edit-main-content},  
+                                                ~{:: #edit-footer}
+                                               )}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Edit employee</title>
+
+<th:block id="edit-static-resources" th:replace="~{/fragments/app-fragments::admin-static-resource}"></th:block>
+</head>
+<body>
+
+	<header id="edit-header" th:replace="~{/fragments/app-fragments::header-admin}">
+	</header>
+
+
+	<div id="edit-main-content">
+		<form action="#" th:action="@{/edit}" th:object="${nhanvien}"
+			method="post">
+			<h2>Thông tin nhân viên</h2>
+			<table>
+				<tr>
+					<td rowspan="6"><img th:src="@{/images/}+*{hinhanh}" width="210"
+						height="230"></td>
+					<td>Mã nhân viên:</td>
+					<td><input type="text" th:field="*{manv}"></td>
+				
+				
+					<td>Tên nhân viên:</th>
+					<td><input type="text" th:field="*{hoten}"></td>
+				</tr>
+				<tr>
+					<td>Phòng ban:</th>
+					<td><input type="text" th:field="*{mapb}"></td>
+				
+					<td>Giới tính:</th>
+					<td><input type="radio" th:field="*{gioitinh}" th:value="true">Nam
+						<input type="radio" th:field="*{gioitinh}" th:value="false">
+						Nữ</td>
+				</tr>
+
+
+				<tr>
+					<td>Số điện thoại:</th>
+					<td><input type="text" th:field="*{dienthoai}"></td>
+					<td>Email:</th>
+					<td><input type="text" th:field="*{email}"></td>
+				</tr>
+				
+				
+				<tr>
+					<td>Cấp độ:</th>
+					<td><input type="text" th:field="*{capdo}"></td>
+				
+					<td>Ngày sinh:</th>
+					<td><input type="text" th:field="*{ngaysinh}"></td>
+				</tr>
+				<tr>
+					<td>Lương:</th>
+					<td><input type="text" th:field="*{luong}"></td>
+				</tr>
+				<tr>
+					<td>Ghi chú:</th>
+					<td><textarea  th:field="*{ghichu}" rows="3"
+							cols="50"></textarea></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td><input type="submit" value="submit"></td>
+				</tr>
+			</table>
+
+		</form>
+	</div>
+</body>
+</html>
